@@ -2,7 +2,7 @@
 ## what
 
 - SSH uploader to S3 servers
-- hen the upload will get registered in Tierion
+- then the upload will get registered in Tierion
 - runs in secure location (not close to IYO servers)
 - easy python script (js9)
 
@@ -16,6 +16,7 @@
    - metadata: any json file
    - the binary info
    - the name for which profile the registration happens
+   - ...
    
 ## the upload dir
 
@@ -32,6 +33,24 @@
 - /upload/ is to upload any info 
 - /profile/ is to upload profile's
 - once processed then the /upload & /profile is empty again, in other words whoever uses the upload server can only upload the instructions, not retrieve what was registered
+- the docker is mapped to /sshservers/$name
+
+## the main config upload dir (for the host)
+
+- /home/config user
+- only Write on /home/config/do/
+- read on rest
+- pub key is in /home/config/config.pub
+- anyone who wants to have a ssh server for registrar, upload following message to the /home/config/do
+
+- toml
+    - name
+    - pub key(s) of uploader(s) (will allow the uploader to access his ssh server)
+- this toml file is encrypted using the pub key: /home/config/config.pub
+
+- this will use the bash method to create docker for this user
+
+
 
 ## process the dir
 
